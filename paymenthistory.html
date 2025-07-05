@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill-Ease</title>
+</head>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(54, 168, 255);
+    padding: 10px 20px;
+  }
+
+  .nav .left,
+  .nav .right {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav img {
+    width: 200px;
+    height: 70px;
+  }
+
+  .main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 25px;
+  }
+    .nav .right {
+    margin-right: 20px; /* Optional, keeps right side spaced */
+    }
+
+    .nav .right a {
+    margin-left: 20px; /* Spacing between links */
+    padding: 10px; /* Add this if you want clickable area around text */
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    }
+
+    .nav .right a:hover {
+    background-color: rgb(0, 119, 255);
+    border-radius: 5px; /* Optional: makes hover background nicer */
+    }
+    table {
+    width: 100%;
+    border-collapse: collapse;
+
+    }
+
+    th {
+    background-color: #36a8ff;
+    color: white;
+    text-align: left;
+    }
+
+    td, th {
+    padding: 8px;
+    border: 1px solid #ccc;
+    }
+
+
+</style>
+
+<body>
+  <div class="nav">
+    <div class="left">
+      <a href="main.html">
+        <img src="logo.png" alt="Bill-Ease Logo"/>
+      </a>
+    </div>
+    <div class="right">
+      <a href="main.html">Home</a>
+      <a href="billspayment.html">Bills Payment</a>
+      <a href="paymenthistory.html">Payment History</a>
+      <a href="index.html">Logout</a>
+    </div>
+  </div>
+
+  <div class="main">
+  <h2>Payment History</h2>
+  <table id="historyTable" border="1" cellpadding="10" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Reference No.</th>
+        <th>Category</th>
+        <th>Utility</th>
+        <th>Account No.</th>
+        <th>Amount Due</th>
+        <th>Payment Method</th>
+        <th>Total Amount</th>
+      </tr>
+    </thead>
+    <tbody id="historyBody">
+      <!-- Table rows will go here -->
+    </tbody>
+  </table>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const username = localStorage.getItem("loggedInUser");
+
+    if (!username) {
+      alert("Please login to view your payment history.");
+      return;
+    }
+
+    fetch(`https://script.google.com/macros/s/AKfycbx3uk7UpAYZ7_wtvezQ6y0ymBphnijt7YIWSLEkUeXOJPHy3fBXqAoQZ6Mf_TE4YGDN/exec?username=${username}`)
+      .then(response => response.json())
+      .then(data => {
+        const tbody = document.getElementById("historyBody");
+
+        if (data.length === 0) {
+          tbody.innerHTML = "<tr><td colspan='8'>No payment history found.</td></tr>";
+          return;
+        }
+
+        for(const entry of data){
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${new Date(entry.date).toLocaleDateString()}</td>
+            <td>${entry.referenceNumber}</td>
+            <td>${entry.category}</td>
+            <td>${entry.utility}</td>
+            <td>${entry.accountNumber}</td>
+            <td>₱${parseFloat(entry.amountDue).toFixed(2)}</td>
+            <td>${entry.paymentMethod}</td>
+            <td><strong>₱${parseFloat(entry.totalAmount).toFixed(2)}</strong></td>
+          `;
+          tbody.appendChild(row);
+        };
+      })
+      .catch(err => {
+        console.error("Failed to load history", err);
+        alert("Something went wrong while fetching payment history.");
+      });
+  });
+</script>
+
+</body>
+
+</html>

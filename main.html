@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill-Ease</title>
+</head>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(54, 168, 255);
+    padding: 10px 20px;
+  }
+
+  .nav .left,
+  .nav .right {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav img {
+    width: 200px;
+    height: 70px;
+  }
+
+  .tagline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 20px;
+  }
+    .nav .right {
+    margin-right: 20px; /* Optional, keeps right side spaced */
+    }
+
+    .nav .right a {
+    margin-left: 20px; /* Spacing between links */
+    padding: 10px; /* Add this if you want clickable area around text */
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    }
+
+    .nav .right a:hover {
+    background-color: rgb(0, 119, 255);
+    border-radius: 5px; /* Optional: makes hover background nicer */
+    }
+    .main_image{
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .main_image img{
+      width: 750px;
+      height: 400px;
+      border-radius: 20px;
+    }
+
+    h1{
+      margin-bottom: 0;
+    }
+    h1,p{
+      color:rgb(94, 94, 94);
+    }
+
+</style>
+
+<body>
+  <div class="nav">
+    <div class="left">
+      <a href="main.html">
+        <img src="logo.png" alt="Bill-Ease Logo"/>
+      </a>
+    </div>
+    <div class="right">
+      <a href="main.html">Home</a>
+      <a href="billspayment.html">Bills Payment</a>
+      <a href="paymenthistory.html">Payment History</a>
+      <a href="index.html">Logout</a>
+    </div>
+  </div>
+
+  <div class="tagline">
+    <div class="main_image">
+      <img src="main_image.png">
+    </div>
+    <h1>Bills payment is now easier and faster!</h1>
+    <p>Manage all your bills in one place — securely, conveniently, and on time. Say goodbye to long queues and late fees!</p>
+  </div>
+</body>
+
+</html>

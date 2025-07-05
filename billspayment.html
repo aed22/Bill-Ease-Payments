@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill-Ease</title>
+</head>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+  #categories{
+    width: 200px;
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(54, 168, 255);
+    padding: 10px 20px;
+  }
+
+  .nav .left,
+  .nav .right {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav img {
+    width: 200px;
+    height: 70px;
+  }
+
+  .main {
+    margin: 0 auto;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 700px;
+    padding: 20px;
+    border-radius: 4px;
+  }
+  fieldset{
+    border-radius: 4px;
+  }
+  .nav .right {
+  margin-right: 20px; /* Optional, keeps right side spaced */
+    }
+
+    .nav .right a {
+    margin-left: 20px; /* Spacing between links */
+    padding: 10px; /* Add this if you want clickable area around text */
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    }
+
+    .nav .right a:hover {
+    background-color: rgb(0, 119, 255);
+    border-radius: 5px; /* Optional: makes hover background nicer */
+    }
+       .utilities {
+        display: none;
+        margin-top: 15px;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    #electricity,#water, #telco {
+        display: flex;
+        justify-content: center;
+    }
+    .utility {
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 200px;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+    }
+    .utilities img{
+        width: 50px;
+        height: 50px;
+    }
+    .utility:hover {
+    transform: scale(1.05);
+    background-color: #f0f8ff;
+    }
+    .form-row {
+    display: flex;
+    gap: 20px;
+    }
+
+    .form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    }
+
+    .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    }
+    .form-group input, .form-group select, #categories {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+    border-color: rgb(0, 119, 255);
+    }
+
+    .submit{
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .submit button{
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      width: 80px;
+      padding: 6px;
+      margin: 10px;
+    }
+
+    .submit button:hover{
+      color: white;
+      background-color: rgb(0, 119, 255);
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+</style>
+
+<body onload="showOptions()">
+  <div class="nav">
+    <div class="left">
+      <a href="main.html">
+        <img src="logo.png" alt="Bill-Ease Logo"/>
+      </a>
+    </div>
+    <div class="right">
+      <a href="main.html">Home</a>
+      <a href="billspayment.html">Bills Payment</a>
+      <a href="paymenthistory.html">Payment History</a>
+      <a href="index.html">Logout</a>
+    </div>
+  </div>
+  <div class="main">
+    <h1>Bills Payment</h1>
+    <form id="googleForm">
+        <fieldset>
+            <legend>Bills Information</legend>
+            <p id="user_name"></p>
+            <label for="categories">Categories: </label>
+            <select name="categories" id="categories" onchange="showOptions()" required>
+                <option value="">--- Select ---</option>
+                <option value="electricity">Electric Utilities</option>
+                <option value="water">Water Utilities</option>
+                <option value="telco">Telecoms</option>
+            </select>
+            <div id="electricity" class="utilities">
+                <div class="utility" data-name="BATELEC">
+                    <img src="batelec.png" alt="BATELEC">
+                    <p>BATELEC</p>
+                </div>
+                <div class="utility" data-name="Clark Electric">
+                    <img src="clark.png" alt="Clark Electric">
+                    <p>Clark Electric</p>
+                </div>
+                <div class="utility" data-name="Meralco">
+                    <img src="meralco.png" alt="Meralco">
+                    <p>Meralco</p>
+                </div>
+            </div>
+            <div id="water" class="utilities">
+                <div class="utility" data-name="Amadeo Water District">
+                    <img src="amadeo.jpg" alt="Amadeo">
+                    <p>Amadeo Water District</p>
+                </div>
+                <div class="utility" data-name="Prime Water Tagaytay">
+                    <img src="primewater.png" alt="Prime Water">
+                    <p>Prime Water Tagaytay</p>
+                </div>
+                <div class="utility" data-name="Dasmariñas Water District">
+                    <img src="dasma.jpg" alt="Dasma">
+                    <p>Prime Water Tagaytay</p>
+                </div>
+                
+            </div>
+            <div id="telco" class="utilities">
+                <div class="utility" data-name="Smart Communications">
+                        <img src="smart.jpg" alt="Smart">
+                        <p>Smart Communications</p>
+                </div>
+                <div class="utility" data-name="Globe Telecom">
+                    <img src="globe.png" alt="Globe">
+                    <p>Globe Telecom</p>
+                </div>
+                <div class="utility" data-name="PLDT">
+                    <img src="pldt.jpg" alt="PLDT">
+                    <p>PLDT</p>
+                </div>
+            </div>
+            <input type="hidden" id="categoryField" name="categoryField">
+            <input type="hidden" id="utilityField" name="utilityField">
+            <input type="hidden" id="selectedUtility" name="selectedUtility">
+
+            <!-- Payment section (initially hidden) -->
+            <div id="accountSection" style="display: none; margin-top: 20px;">
+            <div class="form-row">
+                <div class="form-group">
+                <label for="accountNumber">Account Number</label>
+                <input type="text" id="accountNumber" name="accountNumber" required/>
+                </div>
+                <div class="form-group">
+                <label for="amountDue">Amount Due</label>
+                <input type="number" id="amountDue" name="amountDue" min="1" required/>
+                </div>
+                <div class="form-group">
+                <label for="paymentMethod">Payment Method</label>
+                <select id="paymentMethod" name="paymentMethod" required>
+                    <option value="">--- Select ---</option>
+                    <option value="cash">Cash</option>
+                    <option value="onlinebank">Online Banking</option>
+                    <option value="card">Card</option>
+                    <option value="e-wallet">E-Wallet</option>
+                </select>
+                </div>
+            </div>
+            </div>         
+            </fieldset>
+            <input type="hidden" id="referenceNumber" name="referenceNumber">
+            <input type="hidden" id="totalAmount" name="totalAmount">
+            <input type="hidden" id="userField" name="userField">
+
+            <div class="submit">
+            <button class="submit" type="submit" id="submit">Submit</button>
+            <button class="submit" type="reset" id="refresh" onclick="location.reload()" style="display: none;">Pay Again</button>
+            </div>
+    </form>
+    <p id="receipt"></p>
+  </div>
+<script>
+
+    let receiptDetails;
+    let refNumber = generateReferenceNumber(8);
+
+    const username = localStorage.getItem('loggedInUser');
+    if (username) {
+      document.getElementById('user_name').innerHTML = `<b>Username: </b> ${username}`;
+    } else {
+      document.getElementById('user_name').innerHTML = `<b>Username: </b> user}`;
+    }
+
+    function showOptions(){
+        const menus = document.querySelectorAll(".utilities");
+        menus.forEach(menu => menu.style.display = 'none');
+        
+        accountSection.style.display = 'none';
+        const selected = document.getElementById('categories').value;
+        if(selected){
+            document.getElementById(selected).style.display='flex';
+        }
+    }
+
+
+      const utilities = document.querySelectorAll('.utility');
+      const selectedInput = document.getElementById('selectedUtility');
+      const accountSection = document.getElementById('accountSection');
+
+    utilities.forEach(util => {
+        util.addEventListener('click', () => {
+        const name = util.getAttribute('data-name');
+        selectedInput.value = name;
+        accountSection.style.display = 'block';
+        });
+    });
+
+    function calculateTotalAmount() {
+      let subtotal = parseFloat(document.getElementById("amountDue").value);
+      let category = document.getElementById("categories").options[document.getElementById("categories").selectedIndex].text;
+      let utility = document.getElementById("selectedUtility").value;
+
+      if (isNaN(subtotal)) {
+        alert("Please enter a valid amount.");
+        return;
+      }
+
+      const transactionFee = 10;
+      const vatRate = 0.12;
+      const vat = subtotal * vatRate;
+      let total = subtotal + transactionFee + vat; // ✅ moved here
+
+      document.getElementById("referenceNumber").value = refNumber;
+      document.getElementById("totalAmount").value = total.toFixed(2);
+      document.getElementById("userField").value = username || "unknown";
+      document.getElementById("categoryField").value = category;
+      document.getElementById("utilityField").value = utility; 
+
+      // Build receipt
+      receiptDetails = `<h2>Receipt</h2><ul style="list-style:none;">`;
+      receiptDetails += `</ul>`;
+      receiptDetails += `Reference Number: ${refNumber}<br>`;
+      receiptDetails += `Username: ${username}<br>`;
+      receiptDetails += `Category: ${category}<br>`;
+      receiptDetails += `Selected Utility: ${utility}`;
+      receiptDetails += `<hr>`;
+      receiptDetails += `Subtotal: ₱${subtotal.toFixed(2)}<br>`;
+      receiptDetails += `VAT: ₱${vat.toFixed(2)}<br>`;
+      receiptDetails += `Transaction Fee: ₱${transactionFee.toFixed(2)}<br>`;
+      receiptDetails += `<strong>Total Amount Paid: ₱${total.toFixed(2)}</strong>`;
+
+      document.getElementById("receipt").innerHTML = receiptDetails;
+      document.getElementById("submit").disabled = true;
+      document.getElementById("refresh").style.display = 'block';
+
+      if (confirm("Would you like to print a receipt?")) {
+        printReceipt();
+      }
+    }
+
+
+    function printReceipt(){
+            
+
+            // Get current date and time
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString();
+            const formattedTime = now.toLocaleTimeString();
+
+        const html = `
+        <html>
+        <head>
+            <title>Receipt</title>
+            <style>
+                html {
+                    font-family: 'Courier New', monospace;
+                    background-color: #fff;
+                    padding: 30px;
+                    color: #000;
+                }
+                .receipt-box {
+                    max-width: 400px;
+                    margin: auto;
+                    padding: 20px;
+                    border: 2px dashed #000;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+                .logo {
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+                .logo img {
+                    width: 200px;
+                    height: auto;
+                }
+                .details {
+                    font-size: 14px;
+                    margin-bottom: 10px;
+                }
+                .message {
+                    margin-top: 20px;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                .thankyou {
+                    text-align: center;
+                    margin-top: 30px;
+                    font-size: 14px;
+                    font-style: italic;
+                }
+            </style>
+        </head>
+
+            <div class="receipt-box">
+                <div class="logo">
+                    <img src="logo2.png" alt="Bank Logo">
+                </div>
+                <div class="details">
+                    <strong>Date:</strong> ${formattedDate}<br>
+                    <strong>Time:</strong> ${formattedTime}
+                </div>
+                <div class="message">
+                    ${receiptDetails}
+                </div>
+                <div class="thankyou">
+                    <input type="button" value="Print Receipt" onClick="window.print()"><br><br>
+                    Thank you for transacting with us!
+                </div>
+            </div>
+
+            <script>
+                window.onload = function() {
+                    window.print();
+                }
+            <\/script>
+
+        </html>`;
+
+
+
+            const printWindow = window.open('', '', 'width=900,height=900');
+            printWindow.document.open();
+            printWindow.document.write(html);
+            printWindow.document.close();
+        }
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx3uk7UpAYZ7_wtvezQ6y0ymBphnijt7YIWSLEkUeXOJPHy3fBXqAoQZ6Mf_TE4YGDN/exec';
+
+    const form = document.getElementById('googleForm');
+
+    function generateReferenceNumber(length) {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      const charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return result;
+    }
+
+    
+
+    //When the user clicks the submit button, this function runs.
+
+    form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    calculateTotalAmount(); // ✅ Moved here so form values are updated before fetch()
+
+    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+      .then(response => response.text())
+      .then(text => {
+        if (text === "Success") {
+          alert("Payment successful!");
+          form.reset();
+          document.getElementById("submit").disabled = true;
+          document.getElementById("refresh").style.display = 'block';
+        } else {
+          alert("Unexpected response: " + text);
+        }
+      })
+      .catch(error => alert('Error!', error.message));
+  });
+
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bill-Ease Register</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #b1ceff;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .logo img {
+      width: 250px;
+      height: 90px;
+    }
+
+    .center-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .register-container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 350px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #36a8ff;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #36a8ff;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    a {
+      color: #36a8ff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <a href="index.html">
+      <img src="logo.png" alt="Bill-Ease Logo" />
+    </a>
+  </div>
+
+  <div class="center-wrapper">
+    <div class="register-container">
+      <h2>Register</h2>
+      <form id="googleForm">
+        <input type="text" placeholder="Full Name" name="fullname" required />
+        <input type="email" placeholder="Email Address" name="email" required />
+        <input type="text" placeholder="Username" name="username" required />
+        <input type="password" placeholder="Password" name="password" required />
+        <button type="submit">Register</button>
+      </form>
+      <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+  </div>
+   <script>
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx3uk7UpAYZ7_wtvezQ6y0ymBphnijt7YIWSLEkUeXOJPHy3fBXqAoQZ6Mf_TE4YGDN/exec';
+
+    const form = document.getElementById('googleForm');
+
+    
+
+    //When the user clicks the submit button, this function runs.
+
+    form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+      .then(response => response.text())
+      .then(text => {
+        if (text === "UsernameExists") {
+          alert("Username already exists. Please choose another one.");
+        } else if (text === "EmailExists") {
+          alert("Email already exists. Please use a different email.");}
+          else if (text === "Success") {
+          alert("Registration successful!");
+          form.reset();
+          window.location.href = 'login.html';
+        } else {
+          alert("Unexpected response: " + text);
+        }
+      })
+      .catch(error => alert('Error!', error.message));
+  });
+
+
+    </script>
+</body>
+</html>
